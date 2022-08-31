@@ -2,12 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const ejs = require("ejs");
+const path = require("path");
 const nodemailer = require("nodemailer");
 console.log("here-1");
 const MongoClient = require("mongodb").MongoClient;
 
 const assert = require("assert");
 const mongoose = require("mongoose");
+app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 console.log("here1");
 const DB = 'mongodb+srv://IshanAdmin:IshanAd123@mycluster.1jmr5.mongodb.net/HotelBookings?retryWrites=true&w=majority'
@@ -19,7 +21,7 @@ mongoose.connect(DB, {
 }).then(() => {
     console.log("connection established with altas");
 }).catch((err) => console.log(err));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
