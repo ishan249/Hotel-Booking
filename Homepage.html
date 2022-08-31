@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='https://fonts.googleapis.com/css?family=Aubrey' rel='stylesheet'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@700&family=Work+Sans:ital,wght@0,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Albert Sans' rel='stylesheet'>
+    <title>Hotel site</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        .nav-link {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: black;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+            text-decoration-color: black;
+        }
+
+
+
+        a {
+            text-decoration: none;
+        }
+
+        #homePage {
+            background-image: url("images/paolo-nicolello-2gOxKj594nM-unsplash.jpg");
+            background-repeat: no-repeat;
+            background-size: 1280px;
+            /* border: 3px black solid; */
+            border-radius: 10px;
+            margin: 6px;
+            padding: 15px;
+            height: 700px;
+            color: black;
+            /* background-color: rgb(197, 33, 33); */
+        }
+
+
+        .tagLine {
+            margin-top: 50px;
+            color: black;
+            font-family:'Albert Sans';
+            /* font-style: italic; */
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+
+
+        .btn-dark {
+            margin-top: 60px;
+            border-radius: 25px;
+            /* height: 45px; */
+            width: 130px;
+            text-decoration: none;
+        }
+
+        .btn-dark:hover {
+            background-color: black;
+        }
+
+        #foodPage {
+            margin: 0;
+        }
+
+        .foodText {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: black;
+            /* padding-top: 50px; */
+
+        }
+
+        .socialAccounts {
+            padding: 10px;
+        }
+
+        .Food {
+            text-align: center;
+            height: 300px;
+            width: 400px;
+            margin-top: 25px;
+            padding: 7px;
+
+        }
+
+        .Room {
+
+            text-align: center;
+            height: 300px;
+            padding: 7px;
+            width: 400px;
+        }
+
+        @media only screen and (max-width: 576px) {
+            .hotelImage {
+                height: 250px;
+                width: 350px;
+            }
+
+            .foodImage {
+                /* height: 200px; */
+                width: 200px;
+            }
+        }
+
+
+        .foodImage {
+            border-radius: 15px;
+            margin: 20px;
+            width: 360px;
+        }
+
+        .hotelImage {
+            border-radius: 15px;
+            height: 250px;
+            width: 360px;
+            margin: 20px;
+            /* margin-left: 40px; */
+        }
+
+        /* @media only screen and (max-width: 600px) {...} */
+        .roomsText {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: black;
+            padding-left: 20px;
+        }
+        .BookingArea{
+            margin: 25px;
+            /* border: 2px black solid; */
+        }
+
+        #footer {
+            background-color: rgba(59, 57, 57, 0.902);
+        }
+        .showBtn{
+            border: none;
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            margin-top: 7px;
+
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            /* margin-left: 5px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="home">
+        <div class="hotelNavbar">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a style="font-family: 'Albert Sans'; font-weight:bold; font-size:35px;" class="navbar-brand" href="#">Hotel
+                    Name</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Home
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <form action="/showBookings" method="get">
+
+                                <button type="submit" class="showBtn">My Bookings</button>
+                            </form>
+                          </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <br>
+    <div id="homePage">
+        <div class="tagLine text-center">
+            <span> Are you searching for Good place to stay and eat amazing food ?</span>
+            <br>
+            <span>If Yes then we have figured you out !!</span>
+            <br>
+            <span>One of the best option you will get in the west if you want to enjoy your vacations.</span>
+            <br>
+            <button type="button" onclick="goToBooking();" class="btn btn-dark">Start Booking</button>
+            <form action="/goToAdminSection" method="get">
+              <button type="submit" class="btn btn-dark">Admin Section</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="BookingArea" id="bookingCard">
+
+        <div class="d-flex flex-wrap-reverse justify-content-around" id="roomsPage">
+            <div class="Room">
+                <span class="roomsText">We are aware that you are here to chill
+                    <br>
+                    Your relaxation aspects will be fully taken care of
+                    <br> Stay in hotel comfortable rooms and enjoy your time</span>
+                <br>
+                <form action="/RoomBooking" method="get">
+
+                    <button type="submit" class="btn btn-dark">Book Now</button>
+                </form>
+            </div>
+            <div class="Room">
+                <img src="images/alexander-kaunas-67-sOi7mVIk-unsplash.jpg" alt="hotel image" class="hotelImage">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card-footer" id="footer">
+        <div class="socials text-center">
+            <a href="#" class="socialAccounts"><img src="images/instagram.png" alt="" height="20px" width="20px"></a>
+            <a href="#" class="socialAccounts"><img src="images/email.png" alt="" height="20px" width="20px"></a>
+            <a href="#" class="socialAccounts"><img src="images/whatsapp.png" alt="" height="20px" width="20px"></a>
+        </div>
+        <br>
+        <div style="font-family: sans-serif;" class="text-center">
+            &copy; 2022 Hotel Name
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+        <script>
+            function goToBooking() {
+                document.getElementById('bookingCard').scrollIntoView();
+            }
+        </script>
+</body>
+
+</html>

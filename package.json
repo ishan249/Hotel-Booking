@@ -1,0 +1,22 @@
+{
+  "name": "booking-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "UserApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "handlebars": "^4.7.7",
+    "mongodb": "^4.8.0",
+    "mongoose": "^6.4.6",
+    "nodemailer": "^6.7.7",
+    "nodemon": "^2.0.19"
+  }
+}
