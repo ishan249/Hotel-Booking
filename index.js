@@ -141,7 +141,7 @@ app.post("/showBookings",async function (req, res) {
 app.post("/goToAdminSection",async function(req,res){
   const adminPass = req.body.adminPassword;
   const adminUser = req.body.adminUsername;
-  if (adminUser == "admin" && adminPass == "admin123") {
+  if (adminUser == "adminIshan" && adminPass == "adminIshanp#0397") {
     const dataBase = client.db("HotelBookings");
     const coll = dataBase.collection("users");
     const queryCount = await coll.countDocuments({});
