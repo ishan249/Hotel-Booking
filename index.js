@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 console.log("here1");
-const DB = 'mongodb+srv://IshanAdmin:IshanAd123@mycluster.1jmr5.mongodb.net/HotelBookings?retryWrites=true&w=majority'
+const DB = 'mongodb+srv://IshanAdmin:IshanAd123@mycluster.1jmr5.mongodb.net/HotelBookings?retryWrites=true&w=majority';
 
 const client = new MongoClient(DB);
 
@@ -39,7 +39,10 @@ app.get("/goToAdminSection",function(req,res){
   res.sendFile(__dirname + "/adminLogin.html");
 
 });
+app.get("/adminInfo", function (req,res){
+  res.sendFile(__dirname + "/adminInfo.html");
 
+});
 
 const bookingSchema = new mongoose.Schema({
     name: String,
@@ -52,6 +55,29 @@ const bookingSchema = new mongoose.Schema({
     BookingId : Number
 });
 let user = mongoose.model("user", bookingSchema);
+const adminSchema = new mongoose.Schema({
+    username: String,
+    password:String
+});
+let admin = mongoose.model("admin", adminSchema);
+
+app.post("/adminInfo", function (req,res){
+
+  var adminData = new admin({
+      username: req.body.newAdminUsername,
+      password:req.body.newAdminPassword
+  });
+
+  adminData.save()
+      .then(item => {
+          console.log("admin data saved");
+      })
+      .catch(err => {
+          console.log(err);
+      });
+
+});
+
 smtpProtocol = nodemailer.createTransport({
 
     service: "gmail",
@@ -141,15 +167,20 @@ app.post("/showBookings",async function (req, res) {
 app.post("/goToAdminSection",async function(req,res){
   const adminPass = req.body.adminPassword;
   const adminUser = req.body.adminUsername;
-  if (adminUser == "adminIshan" && adminPass == "adminIshanp#0397") {
-    const dataBase = client.db("HotelBookings");
-    const coll = dataBase.collection("users");
+  const dataBase = client.db("HotelBookings");
+  const coll1 = dataBase.collection("admins");
+  const passData = await coll1.findOne({username:"adminIshan"});
+  if(adminUser == "adminIshan" && adminPass==(passData.password)){
+
+    const dataBasee = client.db("HotelBookings");
+    const coll = dataBasee.collection("users");
     const queryCount = await coll.countDocuments({});
     const queriesRemaining = 15 - queryCount;
     coll.find().toArray(function (err, userDetails) {
         assert.equal(err, null);
         res.render('AdminHomepage', { 'hotelusers': userDetails, 'totalBookings': queryCount, 'availableBookings':queriesRemaining});
     });
+
   }
 
 });
