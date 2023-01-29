@@ -6,7 +6,6 @@ const path = require("path");
 const nodemailer = require("nodemailer");
 console.log("here-1");
 const MongoClient = require("mongodb").MongoClient;
-
 const assert = require("assert");
 const mongoose = require("mongoose");
 app.set('views',path.join(__dirname,'views'));
@@ -39,8 +38,6 @@ app.get("/goToAdminSection",function(req,res){
   res.sendFile(__dirname + "/adminLogin.html");
 
 });
-
-
 const bookingSchema = new mongoose.Schema({
     name: String,
     email: String,
