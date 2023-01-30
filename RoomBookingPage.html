@@ -1,136 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Albert Sans"
+      rel="stylesheet"
+    />
     <title>Book Room</title>
     <style>
-       ::placeholder{
-        font-family: Georgia, 'Times New Roman', Times, serif;
-       }
-        input{
-            margin: 10px;
-            height: 40px;
-            width: 300px;
-            border-radius: 3px;
-            border: 1px black solid;
-            background: transparent;
-            fill: none;
-        }
+      input {
+        margin: 8px 12px;
+        height: 30px;
+        width: 260px;
+        border-radius: 3px;
+        border: 1px black solid;
+        background: transparent;
+        fill: none;
+      }
+   input:focus{
+    outline:none;
+   }
+      label {
+        font-family: "Albert Sans";
+        margin-left: 16px;
+        margin-top: 4px;
+      }
+      .header {
+        height: 70px;
+        background-color: black;
+        color: white;
+      }
+      .headerText {
+        margin-left: 14px;
+        padding-top: 15px;
+        font-family: "Albert Sans";
+        font-size: 25px;
+        color: white;
+      }
+      select {
+        border-radius: 5px;
+        height: 30px;
+        font-family: "Albert Sans";
+      }
+      button[type="submit"] {
+        margin: 15px;
+        border-radius: 5px;
+      }
+      button[type="submit"]:hover {
+        background-color: black;
+      }
 
-        .BookingForm{
-
-            align-items: center;
-            text-align: center;
-        }
-        label{
-            font-family: monospace;
-        }
-        .header{
-            height: 70px;
-            background-color: rgb(58, 54, 54);
-            text-align: center;
-        }
-        .headerText{
-            /* margin-top: 20px; */
-            padding-top: 15px;
-            font-family: monospace;
-            font-size: 25px;
-            color: white;
-        }
-        select{
-            border-radius: 5px;
-            height: 30px;
-        }
-        button[type="submit"]{
-            margin: 15px;
-            border-radius: 5px;
-        }
-        button[type="submit"]:hover{
-            background-color: black;
-        }
-        .cancel{
-            align-items: center;
-            text-align: center;
-        }
-        .errorMessage{
-            color: red;
-
-        }
-        #BookId{
-            display: none;
-        }
+      .errorMessage {
+        color: red;
+      }
+      #BookId {
+        display: none;
+      }
+      span {
+        color: red;
+      }
+      .valid{
+        border: 1px green solid;
+      }
+      .invalid{
+        border: 1px red solid;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <div class="headerText">Room Booking Details</div>
+      <div class="headerText">Room Booking Details</div>
     </div>
     <div>
-        <form class="BookingForm" method="post" action="/RoomBooking">
-            <input type="text " name="Name" placeholder="Enter your Name" required>
-            <br>
-            <input type="email" name="Email" placeholder="Email" required>
-            <br>
-            <input type="number" name="phoneNumber" placeholder="Phone Number (10 digits)" required>
-            <br>
-            <label for="checkInDate">Check In date</label>
-            <input type="date" name="checkInDate" id="date-input" placeholder="Check In" required>
-            <br>
-            <label for="checkOutDate">Check Out date</label>
-            <input type="date" name="checkOutDate" id="date-output" placeholder="Check Out" required>
-            <br>
-            <div class="newcontainer">
+      <form class="BookingForm" method="post" action="/RoomBooking">
+        <label style="margin-top: 10px;" for="name">Name <span>*</span></label>
+        <br />
+        <input type="text " name="Name" required />
+        <br />
+        <label for="email">Email <span>*</span></label>
+        <br />
+        <input onkeydown="emailValidate()" type="email" id="emailId" name="Email" required />
+        <br />
+        <label for="number">Phone Number <span>*</span></label>
+        <br />
+        <input onkeydown="numberValidate()" type="number" id="phoneNumber" name="phoneNumber" required />
+        <br />
+        <label for="checkInDate">Check In date</label>
+        <input
+          type="date"
+          name="checkInDate"
+          id="date-input"
+          placeholder="Check In"
+          required
+        />
+        <br />
+        <label for="checkOutDate">Check Out date</label>
+        <input
+          type="date"
+          name="checkOutDate"
+          id="date-output"
+          placeholder="Check Out"
+          required
+        />
+        <br />
+        <label for="noOfPeople">Number of People <span>*</span></label>
+        <br />
+        <div class="newcontainer">
+          <input type="number" name="noOfPeople" min="1" max="5" required />
+        </div>
+        <br />
+        <label for="typeOfRoom">Type of Room : </label>
+        <select name="typeOfRoom">
+          <option value="singlebed">Single Bed</option>
+          <option value="doublebed">Double Bed</option>
+          <option value="queen">Queen</option>
+          <option value="king">King</option>
+        </select>
+        <br />
+        <input type="text" name="bookingID" id="BookId" />
 
-                <input type="number" name="noOfPeople" placeholder="Number of People" min="1" max="5" required>
-            </div>
-
-            <label for="typeOfRoom">Type of Room : </label>
-            <select name="typeOfRoom">
-                <option value="singlebed">Single Bed</option>
-                <option value="doublebed">Double Bed</option>
-                <option value="queen">Queen</option>
-                <option value="king">King</option>
-            </select>
-            <br>
-            <input type="text" name="bookingID" id="BookId">
-
-            <button type="submit" onclick="validation();" class="btn btn-dark">Proceed and Book</button>
-        </form>
-        <form action="/CancelBooking" method="post" class="cancel">
-
-            <input type="text" name="Bookingid" placeholder="Enter your ID">
-            <br>
-            <button type="submit" class="btn btn-dark">Cancel Booking</button>
-            <p>(Only Enter Booking ID for cancellation. You can get your Booking ID in My Bookings Section)</p>
-        </form>
+        <button type="submit" onclick="validation();" class="btn btn-dark">
+          Proceed and Book
+        </button>
+      </form>
+    
     </div>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var today = new Date().toISOString().split("T")[0];
+      document.getElementsByName("checkInDate")[0].setAttribute("min", today);
+      document.getElementsByName("checkOutDate")[0].setAttribute("min", today);
+      function validation() {
+        var t = new Date();
+        var input = document.getElementById("date-input").value;
+        var d = new Date(input);
+        var year = d.getFullYear();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var BookingID =
+          t.getSeconds() + "" + t.getMinutes() + "" + month + "" + day;
+        document.getElementById("BookId").value = BookingID;
+      }
+      function emailValidate(){
+     
+        var emailField = document.getElementById("emailId");
+        var email =  document.getElementById("emailId").value;
+        var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if(email.match(pattern)){
+            emailField.classList.add("valid");
+            emailField.classList.remove("invalid");
 
+        }
+        else{
+            emailField.classList.add("invalid");
+            emailField.classList.remove("valid");
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-        <script>
-
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementsByName("checkInDate")[0].setAttribute('min', today);
-            document.getElementsByName("checkOutDate")[0].setAttribute('min', today);
-            function validation(){
-                var t = new Date();
-                var input = document.getElementById("date-input").value;
-                var d = new Date(input);
-                var year = d.getFullYear();
-                var month = d.getMonth()+1;
-                var day = d.getDate();
-                var BookingID = (t.getSeconds()+""+t.getMinutes()+""+month+""+day);
-                document.getElementById('BookId').value=BookingID;
-            }
-
-        </script>
-</body>
+        }
+      }
+      function numberValidate(){
+        var phoneField = document.getElementById("phoneNumber");
+        var phone =  document.getElementById("phoneNumber").value;
+        
+        if(phone.length ==9){
+           phoneField.classList.add("valid");
+            phoneField.classList.remove("invalid");
+        }
+        else{
+            phoneField.classList.add("invalid");
+            phoneField.classList.remove("valid");
+        }
+      }
+    </script>
+  </body>
 </html>

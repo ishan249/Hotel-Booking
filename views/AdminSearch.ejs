@@ -14,7 +14,7 @@
 
   .header {
       height: 70px;
-      background-color: rgb(58, 54, 54);
+      background-color: black;
       text-align: center;
   }
   .allBookings {
@@ -23,7 +23,7 @@
   .headerText {
 
       padding-top: 15px;
-      font-family: monospace;
+      font-family:'Albert Sans';
       font-size: 25px;
       color: white;
   }
@@ -40,14 +40,13 @@
   }
 
           .main-blog {
-              display: flex;
-
-
-
-              background: whitesmoke;
+            display: flex;
               margin-top: 8px;
-              border-left: 5px rgb(37, 37, 94) solid;
+              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
               margin: 15px;
+              width: 300px;
+              border-radius: 5px;
+              background-color: whitesmoke;
           }
 
           .blog {
@@ -73,8 +72,8 @@
           }
 
           .userName {
-              font-family: Georgia, 'Times New Roman', Times, serif;
-              font-size: 25px;
+              font-family:'Albert Sans';
+              font-size: 18px;
           }
           .idCopy{
               color: white;
@@ -101,11 +100,12 @@
     </form>
     <br>
     <div class="MyBookingCard">
+        <div class="d-flex flex-wrap justify-content-around">
         <% hotelusers.forEach(function(Username){ %>
             <div class="main-blog">
                 <div class="blog">
                     <div class="userName">
-                        <b> Booking Under Name of : </b>
+                        <b> Name: </b>
                         <%= Username.name %>
                     </div>
                     <hr>
@@ -114,7 +114,7 @@
                         <ul class="userInfo">
 
                             <li> <b>Booking Id : </b>
-                               <span id="bookingIdText"><%=  Username.BookingId %></span><button class="btn btn-primary" onclick="copybutton();" id="idCopy">Copy</button>
+                               <span id="bookingIdText"><%=  Username.BookingId %></span>
                             </li>
                             <li> <b>Email address : </b>
                                 <%= Username.email %>
@@ -134,8 +134,7 @@
                             <li> <b>Type of Room : </b>
                                 <%= Username.typeOfRoom %>
                             </li>
-                            <button type="button" class="btn btn-primary">Call</button>
-                                   <button type="button" onclick = "sendMail()" class="btn btn-primary">Mail</button>
+                           
                         </ul>
                     </div>
                 </div>
@@ -145,6 +144,7 @@
             </div>
 
             <% }); %>
+        </div>
     </div>
   </body>
 </html>

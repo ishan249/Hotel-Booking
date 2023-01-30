@@ -12,31 +12,30 @@
     <style>
         .header {
             height: 70px;
-            background-color: rgb(58, 54, 54);
+            background-color: black;
             text-align: center;
         }
 
         .headerText {
             /* margin-top: 20px; */
             padding-top: 15px;
-            font-family: monospace;
+            font-family: 'Albert Sans';
             font-size: 25px;
             color: white;
         }
 
         .myBookings {
-            margin: 10px;
+            margin: 10px 10px 10px 0;
         }
 
         .main-blog {
             display: flex;
-
-
-
-            background: whitesmoke;
-            margin-top: 8px;
-            border-left: 5px rgb(37, 37, 94) solid;
-            margin: 15px;
+              margin-top: 8px;
+              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+              margin: 15px;
+              width: 300px;
+              border-radius: 5px;
+              background-color: whitesmoke;
         }
 
         .blog {
@@ -54,16 +53,14 @@
         }
 
         input {
-            margin-bottom: 10px;
-            width: 200px;
-            height: 40px;
-            width: 300px;
-            border-radius: 3px;
-            border: 1px black solid;
-            background: transparent;
-            fill: none;
-
-        }
+        margin: 8px;
+        height: 40px;
+        width: 260px;
+        border-radius: 3px;
+        border: 1px black solid;
+        background: transparent;
+        fill: none;
+      }
 
         .mainPart {
             border-radius: 5px;
@@ -73,7 +70,7 @@
         }
 
         .userName {
-            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-family: 'Albert Sans';
             font-size: 25px;
         }
         .idCopy{
@@ -88,8 +85,20 @@
         .noOfBookings{
           padding-left:10px;
           font-family:'Albert Sans';
-          font-size: 35px;
+          font-size: 25px;
           font-weight: bold;
+        }
+        .btn{
+            margin: 8px;
+            height: 36px;
+            text-align: center;
+            color: white;
+           
+            /* width: 100px; */
+        }
+        .btn:hover{
+            color: black;
+            background-color: white;
         }
     </style>
 </head>
@@ -104,15 +113,24 @@
         <br>
         <button type="submit" class="btn btn-dark">Search</button>
     </form>
-    <br>
+
+    <form action="/CancelBooking" method="post" class="cancel">
+        <p style="font-family: 'Albert Sans'; margin-left: 6px">
+          (Only Enter Booking ID for cancellation. You can get your Booking ID
+          below)
+        </p>
+        <input type="text" name="Bookingid" placeholder="Enter your ID" />
+        <br />
+        <button type="submit" class="btn btn-dark">Cancel Booking</button>
+      </form>
     <div class="MyBookingCard">
       <span class="noOfBookings">Total Bookings : <%= totalBookings %></span>
-
+      <div class="d-flex flex-wrap justify-content-around">
         <% hotelusers.forEach(function(Username){ %>
             <div class="main-blog">
                 <div class="blog">
                     <div class="userName">
-                        <b> Booking Under Name of : </b>
+                        <b> Name : </b>
                         <%= Username.name %>
                     </div>
                     <hr>
@@ -121,7 +139,7 @@
                         <ul class="userInfo">
 
                             <li> <b>Booking Id : </b>
-                               <span id="bookingIdText"><%=  Username.BookingId %></span><button onclick="copybutton();" class="idCopy">Copy</button>
+                               <span id="bookingIdText"><%=  Username.BookingId %></span>
                             </li>
                             <li> <b>Email address : </b>
                                 <%= Username.email %>
@@ -150,6 +168,7 @@
             </div>
 
             <% }); %>
+      </div>
     </div>
     <script>
         function copybutton(){

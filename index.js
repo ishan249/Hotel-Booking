@@ -138,17 +138,20 @@ app.post("/showBookings",async function (req, res) {
 app.post("/goToAdminSection",async function(req,res){
   const adminPass = req.body.adminPassword;
   const adminUser = req.body.adminUsername;
-  if (adminUser == "admin" && adminPass == "admin123") {
-    const dataBase = client.db("HotelBookings");
-    const coll = dataBase.collection("users");
-    const queryCount = await coll.countDocuments({});
-    const queriesRemaining = 15 - queryCount;
-    coll.find().toArray(function (err, userDetails) {
-        assert.equal(err, null);
-        res.render('AdminHomepage', { 'hotelusers': userDetails, 'totalBookings': queryCount, 'availableBookings':queriesRemaining});
-    });
-  }
-
+  const dataBase = client.db("HotelBookings");
+    const coll = dataBase.collection("admins");
+  const admin = await coll.findOne({username:adminUser});
+    if (adminUser == admin.username && adminPass == admin.password) {
+     const coll = dataBase.collection("users");
+     const queryCount = await coll.countDocuments({});
+     const queriesRemaining = 15 - queryCount;
+     coll.find().toArray(function (err, userDetails) {
+         assert.equal(err, null);
+         res.render('AdminHomepage', { 'hotelusers': userDetails, 'totalBookings': queryCount, 'availableBookings':queriesRemaining});
+     });
+   }
+  
+ 
 });
 app.post("/showAllBookings", function(req,res){
   const number = req.body.Email;
