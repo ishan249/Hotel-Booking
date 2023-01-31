@@ -4,13 +4,13 @@ const app = express();
 const ejs = require("ejs");
 const path = require("path");
 const nodemailer = require("nodemailer");
-console.log("here-1");
+
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 const mongoose = require("mongoose");
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
-console.log("here1");
+
 const DB = 'mongodb+srv://IshanAdmin:IshanAd123@mycluster.1jmr5.mongodb.net/HotelBookings?retryWrites=true&w=majority'
 
 const client = new MongoClient(DB);
@@ -30,7 +30,6 @@ app.get("/", function (req, res) {
 app.get("/RoomBooking", function (req, res) {
     res.sendFile(__dirname + "/RoomBookingPage.html");
 });
-
 app.get("/showBookings", function (req, res) {
     res.sendFile(__dirname + "/myBookings.html");
 });
@@ -73,11 +72,15 @@ app.post("/RoomBooking", async function (req, res) {
   const coutDate = outDate.toDateString();
   console.log(coutDate);
 if (queryCount<15) {
+    const username = req.body.Name;
+    const bookingId = req.body.bookingID;
+    const tempPath = __dirname+"/views/bookingMail.ejs";
+    const data =  await ejs.renderFile((tempPath),{'userName': username,'bookId':bookingId});
     var mailOptions = {
         from: "ishanp2022@gmail.com",
         to: req.body.Email,
         subject: "Hotel Booking Successfull",
-        text: "Booking is successfull.You can check out your bookings and details in My Bookings section.Enjoy the stay"
+        html:data
     }
     var userData = new user({
         name: req.body.Name,
