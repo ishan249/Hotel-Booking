@@ -67,10 +67,8 @@ app.post("/RoomBooking", async function (req, res) {
   const queryCount = await coll.countDocuments({});
   const inDate = new Date(req.body.checkInDate);
   const cinDate = inDate.toDateString();
-  console.log(cinDate);
   const outDate = new Date(req.body.checkOutDate);
   const coutDate = outDate.toDateString();
-  console.log(coutDate);
 if (queryCount<15) {
     const username = req.body.Name;
     const bookingId = req.body.bookingID;
