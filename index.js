@@ -41,8 +41,8 @@ app.get("/goToAdminSection",function(req,res){
 const bookingSchema = new mongoose.Schema({
     name: String,
     email: String,
-    checkInDate: Date,
-    checkOutDate: Date,
+    checkInDate: String,
+    checkOutDate: String,
     phoneNumber: Number,
     noOfPeople: Number,
     typeOfRoom: String,
@@ -66,6 +66,12 @@ app.post("/RoomBooking", async function (req, res) {
   const dataBase = client.db("HotelBookings");
   const coll = dataBase.collection("users");
   const queryCount = await coll.countDocuments({});
+  const inDate = new Date(req.body.checkInDate);
+  const cinDate = inDate.toDateString();
+  console.log(cinDate);
+  const outDate = new Date(req.body.checkOutDate);
+  const coutDate = outDate.toDateString();
+  console.log(coutDate);
 if (queryCount<15) {
     var mailOptions = {
         from: "ishanp2022@gmail.com",
@@ -76,8 +82,8 @@ if (queryCount<15) {
     var userData = new user({
         name: req.body.Name,
         email: req.body.Email,
-        checkInDate: req.body.checkInDate,
-        checkOutDate: req.body.checkOutDate,
+        checkInDate: cinDate,
+        checkOutDate: coutDate,
         phoneNumber: req.body.phoneNumber,
         noOfPeople: req.body.noOfPeople,
         typeOfRoom: req.body.typeOfRoom,
