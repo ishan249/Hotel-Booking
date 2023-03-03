@@ -4,7 +4,7 @@ const app = express();
 const ejs = require("ejs");
 const path = require("path");
 const nodemailer = require("nodemailer");
-
+require("dotenv").config()
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
 const mongoose = require("mongoose");
@@ -53,7 +53,7 @@ smtpProtocol = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "ishanp2022@gmail.com",
-        pass: "fozmmirlqtgwbafk"
+        pass: process.env.EMAIL_PASSWORD
     },
     tls: {
         rejectUnauthorized: false
@@ -135,7 +135,7 @@ app.post("/showBookings",async function (req, res) {
     const dataBase = client.db("HotelBookings");
     const coll = dataBase.collection("users");
     const queryCount = await coll.countDocuments({ email: number});
-
+    
     coll.find({ email: number }).toArray(function (err, userDetails) {
         assert.equal(err, null);
         res.render('myBookings', { 'hotelusers': userDetails,'totalBookings':queryCount});
