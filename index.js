@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'ejs');
 
-const DB = process.env.HOTEL_DBURL
+const DB = process.env.MONGO_URL
 
 const client = new MongoClient(DB);
 
