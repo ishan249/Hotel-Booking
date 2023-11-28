@@ -130,6 +130,7 @@ app.post("/CancelBooking", function (req, res) {
         res.sendFile(__dirname + "/Error404.html");
     });
 });
+
 app.post("/showBookings",async function (req, res) {
     const number = req.body.Email;
     const dataBase = client.db("HotelBookings");
